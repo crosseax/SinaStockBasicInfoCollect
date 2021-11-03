@@ -1,0 +1,9 @@
+# Ignore Everything
+*
+
+# But not .py
+!*.py
+# Or directories
+!*/
+!.gitignore
+!README.md
