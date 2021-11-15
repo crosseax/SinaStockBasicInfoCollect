@@ -8,8 +8,7 @@ This is a straightforward python implementation to specifically grab basic infos
 
 ## Dependencies
 
-Before using, make sure you have installed `python3`_ (version 3.6 or older).
-.. _python3: https://www.python.org/downloads/
+Before using, make sure you have installed [python3](https://www.python.org/downloads/) (version 3.6 or older).
 
 The program requires some python libraries to be installed before run. 
 
