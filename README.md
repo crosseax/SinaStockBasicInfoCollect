@@ -6,6 +6,34 @@
 
 This is a straightforward python implementation to specifically grab basic infos about IPO companies in China from Sina Stock website.
 
+## Dependencies
+
+Before using, make sure you have installed `python3`_ (version 3.6 or older).
+.. _python3: https://www.python.org/downloads/
+
+The program requires some python libraries to be installed before run. 
+
+Run following commands using pip/pip3:
+
+1. requests
+```sh
+pip3 install requests
+```
+
+2. Beautiful Soup
+```sh
+pip3 install bs4
+```
+
+3. chardet
+```sh
+pip3 install chardet
+```
+
+4. xlsxwriter
+```sh
+pip3 install xlsxwriter
+```
 ## Instruction of use
 
 1. Clone the repo
