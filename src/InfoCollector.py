@@ -38,7 +38,7 @@ def collecting_infos(url): # for this web in particular
 
 def main():
 
-    ifShowComp = input("Do you wish to show the data collected at the end? [Y/N] ")
+    ifShowComp = input("Show company names collected at the end? [Y/N] ")
 
     # generating URLs
     stockURLs = []
@@ -73,9 +73,9 @@ def main():
     outWorkbook.close()
 
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
-        print (allCompanies)
+        for comp in allCompanies:
+            print (comp[0],comp[1],comp[2])
 
-    
     print ("Done")
 
 
