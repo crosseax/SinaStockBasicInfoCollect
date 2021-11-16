@@ -12,26 +12,11 @@ Before using, make sure you have installed [python](https://www.python.org/downl
 
 The program requires some python libraries to be installed before run. 
 
-Run following commands using pip/pip3:
+Run following commands using to install dependencies:
 
 1. requests
 ```sh
-pip3 install requests
-```
-
-2. Beautiful Soup
-```sh
-pip3 install bs4
-```
-
-3. chardet
-```sh
-pip3 install chardet
-```
-
-4. xlsxwriter
-```sh
-pip3 install xlsxwriter
+pip3 install -r requirements.txt
 ```
 ## Instruction of use
 

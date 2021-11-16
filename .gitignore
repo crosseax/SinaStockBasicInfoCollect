@@ -1,9 +1,10 @@
 # Ignore Everything
 *
 
-# But not .py
+# Exclude
 !*.py
-# Or directories
+!*.txt
+# and directories
 !*/
 !.gitignore
 !README.md
