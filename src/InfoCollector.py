@@ -59,7 +59,7 @@ def main():
         print("Running...")
         for i in executor.map(collecting_infos, stockURLs):
             try:
-                if len(i) > 1:
+                if i:
                     allCompanies.append(i)
             except:
                 pass
