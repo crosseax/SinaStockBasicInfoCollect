@@ -15,6 +15,7 @@ def collecting_infos(url): # for this web in particular
 
     try:
         print ("Collecting data of {} ...".format(url.split("/")[5]))
+        
         # acquiring datas and decoding
         data = requests.get(url)
         decoded = data.content.decode("GB18030") 
