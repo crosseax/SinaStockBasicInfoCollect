@@ -8,7 +8,7 @@ This is a straightforward python implementation to specifically grab basic infos
 
 ## Dependencies
 
-Before using, make sure you have installed [python](https://www.python.org/downloads/) (version 3.6 or older).
+Before using, make sure you have installed [python](https://www.python.org/downloads/) (version 3.6 or newer).
 
 The program requires some python libraries to be installed before run. 
 
