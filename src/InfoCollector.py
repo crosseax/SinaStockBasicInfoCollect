@@ -38,47 +38,42 @@ def collecting_infos(url): # for this web in particular
 
 def main():
 
-    showComp = input("Do you wish to show the data collected at the end? [Y/N] ")
+    ifShowComp = input("Do you wish to show the data collected at the end? [Y/N] ")
 
-    numbers = []
-    for i in infinite_sequence(input("Please input the STARTING stock number: "), int(input("Please input the ENDING stock number: "))+1):
-        numbers.append(str(i))
-
-    # generating stock numbers and creating URLs
+    # generating URLs
     stockURLs = []
-    for num in numbers:
+    for num in infinite_sequence(input("Please input the STARTING stock number: "), int(input("Please input the ENDING stock number: "))+1):
         if num[0] != "6":
             num = "sz" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
         else:
             num = "sh" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
+        stockURLs.append(str(num))
 
 
     # collecting information
-    all_comp = []
-
+    allCompanies = []
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
         for i in executor.map(collecting_infos, stockURLs):
             try:
                 if len(i) > 1:
-                    all_comp.append(i)
+                    allCompanies.append(i)
             except:
                 pass
 
-    
     # creating workbook
     print ("Creating xlsx and importing data...")
     outWorkbook = xlsxwriter.Workbook(r"./CompanyList.xlsx")
     outSheet = outWorkbook.add_worksheet()
-    for row in range(len(all_comp)):
-        for col in range(len(all_comp[0])):
-            outSheet.write(row, col, all_comp[row][col])
+    for row in range(len(allCompanies)):
+        for col in range(len(allCompanies[0])):
+            outSheet.write(row, col, allCompanies[row][col])
     outWorkbook.close()
 
-    if str(showComp) == "Y" or str(showComp) == "y":
-        print (all_comp)
+    if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
+        print (allCompanies)
 
     
     print ("Done")

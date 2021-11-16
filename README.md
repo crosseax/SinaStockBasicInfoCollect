@@ -47,4 +47,4 @@ Input your desired beginning and ending company stock ID to collect the basic in
 
 Example: 1 (equivalent to 000001)
 
-If answer Y for (if creating xlsx file), the program will generate a new ```.xlsx``` file in the same root where you saved ```InfoCollector.py```
+The program will generate a new ```.xlsx``` file in the same root where you saved ```InfoCollector.py```
