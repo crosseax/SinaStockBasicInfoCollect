@@ -24,7 +24,11 @@ pip3 install -r requirements.txt
 
 2. To run the program, use command 
 ```sh
-python3 InfoCollectro.py
+python3 InfoCollector.py
+```
+or
+```sh
+python3 run.py
 ```
 
 
