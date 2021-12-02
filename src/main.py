@@ -11,12 +11,12 @@ def main():
     allCompanies = []
 
     # generating URLs lists
-    allURLs = u.url_generator()
+    allSinaURLs = u.sina_url_generator()
 
     # multi-threading executing the web scrapping function
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
-        for i in executor.map(u.sina_web_getter, allURLs):
+        for i in executor.map(u.sina_web_info_getter, allSinaURLs):
             try:
                 if i:
                     allCompanies.append(i)

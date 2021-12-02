@@ -13,7 +13,7 @@ def infinite_sequence(n, m):
 
 
 # returns a list of all urls
-def url_generator():
+def sina_url_generator():
     # generating URLs according to input
     beginNum = input("Please input the STARTING stock number: ")
     endNum = int(input("Please input the ENDING stock number: "))+1
@@ -30,7 +30,7 @@ def url_generator():
 
 # retrieve the information from sina web in particular
 # takes a url, return a list of decoded information
-def sina_web_getter(url): 
+def sina_web_info_getter(url): 
     try:
         print ("Collecting data of {} ...".format(url.split("/")[5]))
         
