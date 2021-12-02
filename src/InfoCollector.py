@@ -18,20 +18,21 @@ def collecting_infos(url): # for this web in particular
         
         # acquiring datas and decoding
         data = requests.get(url)
-        decoded = data.content.decode("GB18030") 
-        soup = BeautifulSoup(decoded, "html.parser")
+        if data.status_code == 200: 
+            decoded = data.content.decode("GB18030") 
+            soup = BeautifulSoup(decoded, "html.parser")
 
-        # collecting info
-        datas = []
-        for tr in soup.find_all("div", {"class": "com_overview blue_d"}):
-            datas.append("{}：{}".format("公司代码", url.split("/")[5]))
-            for td in tr.find_all('p'):
-                datas.append(td.text)
-        for tr in soup.find_all('div', {'class': 'hq_title'}):
-            for td in tr.find_all('h1'):
-                datas.append(td.text)
-        print ('Done collecting stock {} ...'.format(url.split('/')[5]))
-        return (datas)
+            # collecting info
+            datas = []
+            for tr in soup.find_all("div", {"class": "com_overview blue_d"}):
+                datas.append("{}：{}".format("公司代码", url.split("/")[5]))
+                for td in tr.find_all('p'):
+                    datas.append(td.text)
+            for tr in soup.find_all('div', {'class': 'hq_title'}):
+                for td in tr.find_all('h1'):
+                    datas.append(td.text)
+            print ('Done collecting stock {} ...'.format(url.split('/')[5]))
+            return (datas)
 
     except: 
         pass
