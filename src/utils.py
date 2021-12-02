@@ -19,11 +19,14 @@ def sina_url_generator():
     endNum = int(input("Please input the ENDING stock number: "))+1
     stockURLs = []
     for num in infinite_sequence(beginNum, endNum):
-        if num[0] != "6":
-            num = "sz" + num
+        if num[0] == "6":
+            num = "sh" + num
+            stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
+        elif num[0] == 8:
+            num = "bj" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
         else:
-            num = "sh" + num
+            num = "sz" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
     return stockURLs
 
