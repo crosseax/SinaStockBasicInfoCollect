@@ -55,5 +55,12 @@ def sina_web_getter(url):
         pass
 
 
-
-
+# use collected info to create a workbook
+def creating_workbook(allCompanies): 
+    print ("Creating xlsx file and importing data...")
+    outWorkbook = xlsxwriter.Workbook(r"./CompanyList.xlsx")
+    outSheet = outWorkbook.add_worksheet()
+    for row in range(len(allCompanies)):
+        for col in range(len(allCompanies[0])):
+            outSheet.write(row, col, allCompanies[row][col])
+    outWorkbook.close()

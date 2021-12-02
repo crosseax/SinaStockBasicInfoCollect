@@ -4,14 +4,16 @@ import concurrent.futures
 # This file starts the whole program
 
 def main():
+    # prompt user to decide if showing result at the end
     ifShowComp = input("Show company names collected at the end? [Y/N] ")
+
+    # creating a empty list as result container
+    allCompanies = []
 
     # generating URLs lists
     allURLs = u.url_generator()
 
-    allCompanies = []
-
-    # multi-threading executing the web scrapping
+    # multi-threading executing the web scrapping function
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
         for i in executor.map(u.sina_web_getter, allURLs):
@@ -21,21 +23,13 @@ def main():
             except:
                 pass
 
-
-    # creating workbook
-    print ("Creating xlsx file and importing data...")
-    outWorkbook = u.xlsxwriter.Workbook(r"./CompanyList.xlsx")
-    outSheet = outWorkbook.add_worksheet()
-    for row in range(len(allCompanies)):
-        for col in range(len(allCompanies[0])):
-            outSheet.write(row, col, allCompanies[row][col])
-    outWorkbook.close()
+    # creating xlsx workbook
+    u.creating_workbook(allCompanies)
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
         for comp in allCompanies:
-            if comp != None:
-                print (comp[0], comp[1], comp[2])
+            print (comp[0], comp[1], comp[2])
 
     # result output
     print (f"Numbers of companies' info collected: {len(allCompanies)}")
