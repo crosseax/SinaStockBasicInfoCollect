@@ -51,7 +51,6 @@ def main():
         else:
             num = "sh" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
-        stockURLs.append(str(num))
 
     # collecting information
     allCompanies = []
