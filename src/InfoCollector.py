@@ -48,7 +48,7 @@ def main():
         if num[0] == "6":
             num = "sh" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
-        elif num[0] == "8":
+        elif num[0] == "8" or num[0] == "4":
             num = "bj" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
         else:
