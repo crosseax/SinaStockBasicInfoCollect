@@ -4,7 +4,8 @@
 
 ## Brief
 
-This is a straightforward python implementation to specifically grab basic infos about IPO companies in China from Sina Stock website.
+This program scrapes informations about Chinese stocks online.
+Include basic company informations from Sina Stock website and current Price information from Xueqiu website.
 
 ## Dependencies
 
@@ -24,10 +25,6 @@ pip3 install -r requirements.txt
 
 2. To run the program, use command 
 ```sh
-python3 InfoCollector.py
-```
-or
-```sh
 python3 run.py
 ```
 
@@ -37,3 +34,8 @@ Input your desired beginning and ending company stock ID to collect the basic in
 Example: 1 (equivalent to 000001)
 
 The program will generate a new ```.xlsx``` file in the same root where you saved ```InfoCollector.py```
+
+
+## UPDATES 12/07/2021
+
+Added Xueqiu website for current date's price info
