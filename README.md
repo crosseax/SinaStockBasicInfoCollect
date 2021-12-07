@@ -29,11 +29,11 @@ python3 run.py
 ```
 
 
-Input your desired beginning and ending company stock ID to collect the basic information about all those companies in the middle. 
+Input your desired beginning and ending company stock ID to collect the information about all those companies in the middle. 
 
 Example: 1 (equivalent to 000001)
 
-The program will generate a new ```.xlsx``` file in the same root where you saved ```InfoCollector.py```
+The program will generate a new ```.xlsx``` file in the ```src``` folder.
 
 
 ## UPDATES 12/07/2021
