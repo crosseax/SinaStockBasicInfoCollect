@@ -13,7 +13,7 @@ def main():
     endNum = int(input("Please input the ENDING stock number: "))+1
 
     # creating a empty list as result container
-    allCompanies = []
+    sinaStockInfo = []
 
     # generating URLs lists
     allSinaURLs = u.sina_url_generator(beginNum, endNum)
@@ -24,20 +24,19 @@ def main():
         for i in executor.map(u.sina_web_info_getter, allSinaURLs):
             try:
                 if i:
-                    allCompanies.append(i)
+                    sinaStockInfo.append(i)
             except:
                 pass
 
     # creating xlsx workbook
-    u.creating_workbook(allCompanies)
+    u.creating_workbook(sinaStockInfo)
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
-        for comp in allCompanies:
-            print (comp[0], comp[1], comp[2])
+        u.showSinaInfo(sinaStockInfo)
 
     # result output
-    print (f"Numbers of companies' info collected: {len(allCompanies)}")
+    print (f"Numbers of companies' info collected: {len(sinaStockInfo)}")
     print ("Excel Worksheet successfully created")
     print ("Done")
 
