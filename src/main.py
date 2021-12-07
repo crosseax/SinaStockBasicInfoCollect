@@ -10,6 +10,8 @@ def main():
 
     # prompt user to decide if showing result at the end
     ifShowComp = input("Show company names collected at the end? [Y/N] ")
+    ifSinaStock = input("Collecting Sina Stock info? (Basic company infos) [Y/N] ")
+    ifXueqiuStock = input("Collecting Xueqiu Stock info? (Price info for today) [Y/N] ")
 
     # asking for inputs for stock numbers
     beginNum = input("Please input the STARTING stock number: ")
@@ -24,39 +26,46 @@ def main():
     allXueqiuURLs = gtr.xueqiu_url_generator(beginNum, endNum)
 
     # multi-threading executing the sina web scrapping function
-    with concurrent.futures.ThreadPoolExecutor () as executor:
-        print("Running...")
-        for i in executor.map(gtr.sina_web_info_getter, allSinaURLs):
-            try:
-                if i:
-                    sinaStockInfo.append(i)
-            except:
-                pass
+    if str(ifSinaStock) == "Y" or str(ifSinaStock) == "y":
 
-    ws.creating_sina_workbook(sinaStockInfo)
+        with concurrent.futures.ThreadPoolExecutor () as executor:
+            print("Running...")
+            for i in executor.map(gtr.sina_web_info_getter, allSinaURLs):
+                try:
+                    if i:
+                        sinaStockInfo.append(i)
+                except:
+                    pass
+
+        ws.creating_sina_workbook(sinaStockInfo)
+
+
 
     # multi-threading executing the xueqiu web scrapping function
-    with concurrent.futures.ThreadPoolExecutor () as executor:
-        print("Running...")
-        for i in executor.map(gtr.xueqiu_web_info_getter, allXueqiuURLs):
-            try:
-                if i:
-                    xueqiuStockInfo.append(i)
-            except:
-                pass
+    if str(ifXueqiuStock) == "Y" or str(ifXueqiuStock) == "y":
+        with concurrent.futures.ThreadPoolExecutor () as executor:
+            print("Running...")
+            for i in executor.map(gtr.xueqiu_web_info_getter, allXueqiuURLs):
+                try:
+                    if i:
+                        xueqiuStockInfo.append(i)
+                except:
+                    pass
 
-    ws.creating_xueqiu_workbook(xueqiuStockInfo)
+        ws.creating_xueqiu_workbook(xueqiuStockInfo)
 
 
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
         u.showSinaInfo(sinaStockInfo)
+        print()
+        u.showXueqiuInfo(xueqiuStockInfo)
         
 
     # result output
     print (f"Numbers of Sina companies' info collected: {len(sinaStockInfo)}")
-    print (f"Numbers of Xueqiu companies' info collected: {len(sinaStockInfo)}")
+    print (f"Numbers of Xueqiu companies' info collected: {len(xueqiuStockInfo)}")
     print ("Excel Worksheet successfully created")
     print ("Done")
 
