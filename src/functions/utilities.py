@@ -7,4 +7,4 @@ def showSinaInfo(allCompaniesInfo):
 # showing info for all Xueqiu companies
 def showXueqiuInfo(allCompaniesInfo):
     for comp in allCompaniesInfo:
-        print ("雪球：", comp[1], comp[2])
+        print ("雪球：", comp[2], comp[1])
