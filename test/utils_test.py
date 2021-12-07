@@ -5,6 +5,7 @@ from requests.api import head
 from requests.models import Response
 import xlsxwriter
 import concurrent.futures
+from datetime import date
 
 # number generator
 def infinite_sequence(n, m):
@@ -77,7 +78,7 @@ def sina_web_info_getter(url):
 # retrieve the information from xueqiu web in particular
 # takes a url, return a list of decoded information
 def xueqiu_web_info_getter(url): 
-
+    today = date.today()
     try:
         print ("Collecting data of {} from Xueqiu website ...".format(url.split("/")[4]))
         
@@ -94,6 +95,7 @@ def xueqiu_web_info_getter(url):
             # collecting info
             datas = []
             for tr in soup.find_all("div", {"class": "stock-name"}):
+                datas.append("{}：{}".format("日期", today.strftime("%Y/%m/%d")))
                 datas.append("{}：{}".format("公司名称", tr.text.split('(')[0]))
                 datas.append("{}：{}".format("公司代码", url.split("/")[4]))
             for tr in soup.find_all("div", {"class": "quote-container"}):
@@ -106,12 +108,33 @@ def xueqiu_web_info_getter(url):
         pass
 
 
-# use collected info to create a workbook
-def creating_workbook(allCompanies): 
-    print ("Creating xlsx file and importing data...")
-    outWorkbook = xlsxwriter.Workbook(r"./CompanyList.xlsx")
+# use collected info to create a Sina Stock workbook
+def creating_sina_workbook(allCompanies): 
+    print ("Creating xlsx file and importing Sina Stock data...")
+    outWorkbook = xlsxwriter.Workbook(r"./SinaCompanyList.xlsx")
     outSheet = outWorkbook.add_worksheet()
     for row in range(len(allCompanies)):
         for col in range(len(allCompanies[0])):
             outSheet.write(row, col, allCompanies[row][col])
+    outWorkbook.close()
+
+# use collected info to create a Sina Stock workbook
+def creating_xueqiu_workbook(allCompanies): 
+    print ("Creating xlsx file and importing Xueqiu data...")
+    outWorkbook = xlsxwriter.Workbook(r"./XueqiuCompanyList.xlsx")
+    outSheet = outWorkbook.add_worksheet()
+    
+    titles = []
+    for title in allCompanies[0]:
+        title = title.split('：')[0]
+        titles.append(title)
+    print (titles)
+
+    for col in range(len(titles)):
+        outSheet.write(0, col, titles[col])
+
+    for row in range(len(allCompanies)):
+        for col in range(len(allCompanies[0])):
+            outSheet.write(row+1, col, allCompanies[row][col].split('：')[1])
+    
     outWorkbook.close()

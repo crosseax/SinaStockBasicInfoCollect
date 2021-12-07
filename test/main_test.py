@@ -29,12 +29,12 @@ def main():
                 pass
 
     # creating xlsx workbook
-    u.creating_workbook(allCompanies)
+    u.creating_xueqiu_workbook(allCompanies)
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
         for comp in allCompanies:
-            print (comp[0],comp[1])
+            print (comp[0],comp[1],comp[2])
 
     # result output
     print (f"Numbers of companies' info collected: {len(allCompanies)}")
