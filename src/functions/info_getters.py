@@ -49,7 +49,7 @@ def xueqiu_url_generator(beginNum, endNum):
 # takes a url, return a list of decoded information
 def sina_web_info_getter(url): 
     try:
-        print ("Collecting data of {} from Sina website ...".format(url.split("/")[5]))
+        print ("[Sina] Collecting data of {} ...".format(url.split("/")[5]))
         
         # acquiring datas and decoding
         data = requests.get(url)
@@ -66,7 +66,7 @@ def sina_web_info_getter(url):
             for tr in soup.find_all('div', {'class': 'hq_title'}):
                 for td in tr.find_all('h1'):
                     datas.append(td.text)
-            print ('Done collecting stock {} ...'.format(url.split('/')[5]))
+            print ('[Sina] Done collecting stock {} ...'.format(url.split('/')[5]))
             return (datas)
 
     except: 
@@ -78,7 +78,7 @@ def sina_web_info_getter(url):
 def xueqiu_web_info_getter(url): 
     today = date.today()
     try:
-        print ("Collecting data of {} from Xueqiu website ...".format(url.split("/")[4]))
+        print ("[Xueqiu] Collecting data of {} ...".format(url.split("/")[4]))
         
         # acquiring datas and decoding
         headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}
@@ -99,7 +99,7 @@ def xueqiu_web_info_getter(url):
             for tr in soup.find_all("div", {"class": "quote-container"}):
                 for td in tr.find_all('td'):
                     datas.append(td.text)
-            print ("Done collecting stock {} ...".format(url.split('/')[4]))
+            print ("[Xueqiu] Done collecting stock {} ...".format(url.split('/')[4]))
             return (datas)
 
     except: 
