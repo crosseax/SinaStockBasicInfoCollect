@@ -13,11 +13,8 @@ def infinite_sequence(n, m):
         num += 1
 
 
-# returns a list of all urls
-def sina_url_generator():
-    # generating URLs according to input
-    beginNum = input("Please input the STARTING stock number: ")
-    endNum = int(input("Please input the ENDING stock number: "))+1
+# generates urls for sina stock websites
+def sina_url_generator(beginNum, endNum):
     stockURLs = []
     for num in infinite_sequence(beginNum, endNum):
         if num[0] == "6":
@@ -30,6 +27,8 @@ def sina_url_generator():
             num = "sz" + num
             stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
     return stockURLs
+
+
 
 
 # retrieve the information from sina web in particular

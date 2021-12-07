@@ -4,6 +4,11 @@ import concurrent.futures
 # This file starts the whole program
 
 def main():
+
+    # asking for inputs for stock numbers
+    beginNum = input("Please input the STARTING stock number: ")
+    endNum = int(input("Please input the ENDING stock number: "))+1
+
     # prompt user to decide if showing result at the end
     ifShowComp = input("Show company names collected at the end? [Y/N] ")
 
@@ -11,7 +16,7 @@ def main():
     allCompanies = []
 
     # generating URLs lists
-    allSinaURLs = u.sina_url_generator()
+    allSinaURLs = u.sina_url_generator(beginNum, endNum)
 
     # multi-threading executing the web scrapping function
     with concurrent.futures.ThreadPoolExecutor () as executor:
