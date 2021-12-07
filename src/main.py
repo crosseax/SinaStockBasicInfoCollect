@@ -1,5 +1,8 @@
-import utils as u
+import functions.utilities as u
+import functions.info_getters as gtr
+import functions.worksheet_creators as ws
 import concurrent.futures
+
 
 # This file starts the whole program
 
@@ -14,29 +17,46 @@ def main():
 
     # creating a empty list as result container
     sinaStockInfo = []
+    xueqiuStockInfo = []
 
     # generating URLs lists
-    allSinaURLs = u.sina_url_generator(beginNum, endNum)
+    allSinaURLs = gtr.sina_url_generator(beginNum, endNum)
+    allXueqiuURLs = gtr.xueqiu_url_generator(beginNum, endNum)
 
-    # multi-threading executing the web scrapping function
+    # multi-threading executing the sina web scrapping function
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
-        for i in executor.map(u.sina_web_info_getter, allSinaURLs):
+        for i in executor.map(gtr.sina_web_info_getter, allSinaURLs):
             try:
                 if i:
                     sinaStockInfo.append(i)
             except:
                 pass
 
-    # creating xlsx workbook
-    u.creating_workbook(sinaStockInfo)
+    ws.creating_sina_workbook(sinaStockInfo)
+
+    # multi-threading executing the xueqiu web scrapping function
+    with concurrent.futures.ThreadPoolExecutor () as executor:
+        print("Running...")
+        for i in executor.map(gtr.xueqiu_web_info_getter, allXueqiuURLs):
+            try:
+                if i:
+                    xueqiuStockInfo.append(i)
+            except:
+                pass
+
+    ws.creating_xueqiu_workbook(xueqiuStockInfo)
+
+
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
         u.showSinaInfo(sinaStockInfo)
+        
 
     # result output
-    print (f"Numbers of companies' info collected: {len(sinaStockInfo)}")
+    print (f"Numbers of Sina companies' info collected: {len(sinaStockInfo)}")
+    print (f"Numbers of Xueqiu companies' info collected: {len(sinaStockInfo)}")
     print ("Excel Worksheet successfully created")
     print ("Done")
 
