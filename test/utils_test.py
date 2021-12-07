@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import chardet
+from requests.api import head
 from requests.models import Response
 import xlsxwriter
 import concurrent.futures
@@ -76,28 +77,29 @@ def sina_web_info_getter(url):
 # retrieve the information from xueqiu web in particular
 # takes a url, return a list of decoded information
 def xueqiu_web_info_getter(url): 
+
     try:
         print ("Collecting data of {} from Xueqiu website ...".format(url.split("/")[4]))
         
         # acquiring datas and decoding
-        data = requests.get(url)
-        print (data)
-        if data.status_code == 200 :
-            print ("is data")
-            # decoded = data.content.decode("GB18030") 
-            # soup = BeautifulSoup(decoded, "html.parser")
+        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}
 
-            # # collecting info
-            # datas = []
-            # for tr in soup.find_all("div", {"class": "com_overview blue_d"}):
-            #     datas.append("{}：{}".format("公司代码", url.split("/")[5]))
-            #     for td in tr.find_all('p'):
-            #         datas.append(td.text)
-            # for tr in soup.find_all('div', {'class': 'hq_title'}):
-            #     for td in tr.find_all('h1'):
-            #         datas.append(td.text)
-            # print ('Done collecting stock {} ...'.format(url.split('/')[5]))
-            # return (datas)
+        data = requests.get(url, headers=headers)
+        print (data.status_code)
+        if data.status_code == 200 :
+            # print ("is data")
+            # print (chardet.detect(data.content))
+            decoded = data.content.decode("utf-8") 
+            soup = BeautifulSoup(decoded, "html.parser")
+
+            # collecting info
+            datas = []
+            for tr in soup.find_all("div", {"class": "quote-container"}):
+                datas.append("{}：{}".format("公司代码", url.split("/")[4]))
+                for td in tr.find_all('td'):
+                    datas.append(td.text)
+            print ("Done collecting stock {} ...".format(url.split('/')[4]))
+            return (datas)
 
     except: 
         pass
