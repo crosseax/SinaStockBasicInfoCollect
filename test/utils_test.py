@@ -85,7 +85,6 @@ def xueqiu_web_info_getter(url):
         headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}
 
         data = requests.get(url, headers=headers)
-        print (data.status_code)
         if data.status_code == 200 :
             # print ("is data")
             # print (chardet.detect(data.content))
@@ -94,8 +93,10 @@ def xueqiu_web_info_getter(url):
 
             # collecting info
             datas = []
-            for tr in soup.find_all("div", {"class": "quote-container"}):
+            for tr in soup.find_all("div", {"class": "stock-name"}):
+                datas.append("{}：{}".format("公司名称", tr.text.split('(')[0]))
                 datas.append("{}：{}".format("公司代码", url.split("/")[4]))
+            for tr in soup.find_all("div", {"class": "quote-container"}):
                 for td in tr.find_all('td'):
                     datas.append(td.text)
             print ("Done collecting stock {} ...".format(url.split('/')[4]))
