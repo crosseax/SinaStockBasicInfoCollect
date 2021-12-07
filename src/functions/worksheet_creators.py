@@ -1,9 +1,4 @@
-# import requests
-# import chardet
-# import concurrent.futures
 import xlsxwriter
-# from bs4 import BeautifulSoup
-# from datetime import date
 
 
 # use collected info to create a Sina Stock workbook
@@ -26,7 +21,6 @@ def creating_xueqiu_workbook(allCompanies):
     for title in allCompanies[0]:
         title = title.split('：')[0]
         titles.append(title)
-    print (titles)
 
     for col in range(len(titles)):
         outSheet.write(0, col, titles[col])

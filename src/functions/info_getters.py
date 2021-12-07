@@ -1,6 +1,4 @@
 import requests
-# import chardet
-# import concurrent.futures
 from bs4 import BeautifulSoup
 from datetime import date
 
@@ -80,13 +78,11 @@ def xueqiu_web_info_getter(url):
     try:
         print ("[Xueqiu] Collecting data of {} ...".format(url.split("/")[4]))
         
-        # acquiring datas and decoding
         headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}
 
+        # acquiring datas and decoding
         data = requests.get(url, headers=headers)
         if data.status_code == 200 :
-            # print ("is data")
-            # print (chardet.detect(data.content))
             decoded = data.content.decode("utf-8") 
             soup = BeautifulSoup(decoded, "html.parser")
 
