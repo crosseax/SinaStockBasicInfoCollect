@@ -1,10 +1,9 @@
 import requests
-from bs4 import BeautifulSoup
 import chardet
-from requests.api import head
-from requests.models import Response
 import xlsxwriter
 import concurrent.futures
+from bs4 import BeautifulSoup
+from requests.models import Response
 from datetime import date
 
 # number generator
