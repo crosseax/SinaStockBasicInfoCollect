@@ -5,12 +5,12 @@ import concurrent.futures
 
 def main():
 
+    # prompt user to decide if showing result at the end
+    ifShowComp = input("Show company names collected at the end? [Y/N] ")
+
     # asking for inputs for stock numbers
     beginNum = input("Please input the STARTING stock number: ")
     endNum = int(input("Please input the ENDING stock number: "))+1
-
-    # prompt user to decide if showing result at the end
-    ifShowComp = input("Show company names collected at the end? [Y/N] ")
 
     # creating a empty list as result container
     allCompanies = []

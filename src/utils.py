@@ -29,27 +29,11 @@ def sina_url_generator(beginNum, endNum):
     return stockURLs
 
 
-# generates urls for xueqiu stock websites
-def xueqiu_url_generator(beginNum, endNum):
-    stockURLs = []
-    for num in infinite_sequence(beginNum, endNum):
-        if num[0] == "6":
-            num = "SH" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
-        elif num[0] == "8" or num[0] == "4":
-            num = "BJ" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
-        else:
-            num = "SZ" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
-    return stockURLs
-
-
 # retrieve the information from sina web in particular
 # takes a url, return a list of decoded information
 def sina_web_info_getter(url): 
     try:
-        print ("Collecting data of {} ...".format(url.split("/")[5]))
+        print ("Collecting data of {} from Sina website ...".format(url.split("/")[5]))
         
         # acquiring datas and decoding
         data = requests.get(url)
