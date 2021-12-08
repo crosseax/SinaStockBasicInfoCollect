@@ -14,32 +14,26 @@ def infinite_sequence(n, m):
 # generates urls for sina stock websites
 def sina_url_generator(beginNum, endNum):
     stockURLs = []
+    prefix = "sz"
     for num in infinite_sequence(beginNum, endNum):
         if num[0] == "6":
-            num = "sh" + num
-            stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
+            prefix = "sh"
         elif num[0] == "8" or num[0] == "4":
-            num = "bj" + num
-            stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
-        else:
-            num = "sz" + num
-            stockURLs.append("https://finance.sina.com.cn/realstock/company/"+num+"/nc.shtml")
+            prefix = "bj"
+        stockURLs.append(f"https://finance.sina.com.cn/realstock/company/{prefix}{num}/nc.shtml")
     return stockURLs
 
 
 # generates urls for xueqiu stock websites
 def xueqiu_url_generator(beginNum, endNum):
     stockURLs = []
+    prefix = "SZ"
     for num in infinite_sequence(beginNum, endNum):
         if num[0] == "6":
-            num = "SH" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
+            prefix = "SH"
         elif num[0] == "8" or num[0] == "4":
-            num = "BJ" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
-        else:
-            num = "SZ" + num
-            stockURLs.append("https://xueqiu.com/S/" + num)
+            prefix = "BJ"
+        stockURLs.append(f"https://xueqiu.com/S/{prefix}{num}")
     return stockURLs
 
 
