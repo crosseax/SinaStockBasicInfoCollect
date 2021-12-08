@@ -4,7 +4,7 @@ from datetime import date
 
 
 # number generator
-def infinite_sequence(n, m):
+def stock_id_sequence(n, m):
     num = int(n)
     while num < int(m):
         yield "{:06n}".format(num)
@@ -15,7 +15,7 @@ def infinite_sequence(n, m):
 def sina_url_generator(beginNum, endNum):
     stockURLs = []
     prefix = "sz"
-    for num in infinite_sequence(beginNum, endNum):
+    for num in stock_id_sequence(beginNum, endNum):
         if num[0] == "6":
             prefix = "sh"
         elif num[0] == "8" or num[0] == "4":
@@ -28,7 +28,7 @@ def sina_url_generator(beginNum, endNum):
 def xueqiu_url_generator(beginNum, endNum):
     stockURLs = []
     prefix = "SZ"
-    for num in infinite_sequence(beginNum, endNum):
+    for num in stock_id_sequence(beginNum, endNum):
         if num[0] == "6":
             prefix = "SH"
         elif num[0] == "8" or num[0] == "4":
