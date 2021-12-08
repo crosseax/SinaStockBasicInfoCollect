@@ -4,7 +4,7 @@ from datetime import date
 
 
 # number generator
-def stock_id_sequence(n, m):
+def china_stock_id_sequence(n, m):
     num = int(n)
     while num < int(m):
         yield "{:06n}".format(num)
@@ -15,7 +15,7 @@ def stock_id_sequence(n, m):
 def sina_url_generator(beginNum, endNum):
     stockURLs = []
     prefix = "sz"
-    for num in stock_id_sequence(beginNum, endNum):
+    for num in china_stock_id_sequence(beginNum, endNum):
         if num[0] == "6":
             prefix = "sh"
         elif num[0] == "8" or num[0] == "4":
@@ -28,7 +28,7 @@ def sina_url_generator(beginNum, endNum):
 def xueqiu_url_generator(beginNum, endNum):
     stockURLs = []
     prefix = "SZ"
-    for num in stock_id_sequence(beginNum, endNum):
+    for num in china_stock_id_sequence(beginNum, endNum):
         if num[0] == "6":
             prefix = "SH"
         elif num[0] == "8" or num[0] == "4":
@@ -71,7 +71,6 @@ def xueqiu_web_info_getter(url):
     today = date.today()
     try:
         print ("[Xueqiu] Collecting data of {} ...".format(url.split("/")[4]))
-        
         headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}
 
         # acquiring datas and decoding
