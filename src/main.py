@@ -64,6 +64,7 @@ def main():
         
 
     # result output
+    print()
     print (f"Numbers of Sina companies' info collected: {len(sinaStockInfo)}")
     print (f"Numbers of Xueqiu companies' info collected: {len(xueqiuStockInfo)}")
     print ("Excel Worksheet successfully created")
