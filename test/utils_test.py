@@ -1,9 +1,10 @@
+# from typing import Generator
 import requests
-import chardet
+# import chardet
 import xlsxwriter
 import concurrent.futures
 from bs4 import BeautifulSoup
-from requests.models import Response
+# from requests.models import Response
 from datetime import date
 
 # number generator
@@ -16,7 +17,7 @@ def china_stock_id_sequence(n, m):
 
 # generates urls for sina stock websites
 def sina_url_generator(beginNum, endNum):
-#     stockURLs = []
+    # stockURLs = []
     prefix = "sz"
     for num in china_stock_id_sequence(beginNum, endNum):
         if num[0] == "6":
@@ -101,6 +102,18 @@ def xueqiu_web_info_getter(url):
 
     except: 
         pass
+
+
+
+def sina_multithreading_executor(allSinaURLs, allCompanies):
+    with concurrent.futures.ThreadPoolExecutor () as executor:
+        print("Running...")
+        for i in executor.map(sina_web_info_getter, list(allSinaURLs)):
+            try:
+                if i:
+                    allCompanies.append(i)
+            except:
+                pass
 
 
 # use collected info to create a Sina Stock workbook
