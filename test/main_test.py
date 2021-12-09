@@ -16,12 +16,12 @@ def main():
     allCompanies = []
 
     # generating URLs lists
-    allXueqiuUrls = u.xueqiu_url_generator(beginNum, endNum)
+    allSinaURLs = u.sina_url_generator(beginNum, endNum)
 
     # multi-threading executing the web scrapping function
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
-        for i in executor.map(u.xueqiu_web_info_getter, allXueqiuUrls):
+        for i in executor.map(u.sina_web_info_getter, list(allSinaURLs)):
             try:
                 if i:
                     allCompanies.append(i)
@@ -29,7 +29,7 @@ def main():
                 pass
 
     # creating xlsx workbook
-    u.creating_xueqiu_workbook(allCompanies)
+    u.creating_sina_workbook(allCompanies)
 
     # output to command based on user input
     if str(ifShowComp) == "Y" or str(ifShowComp) == "y":
