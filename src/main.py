@@ -30,7 +30,7 @@ def main():
 
         with concurrent.futures.ThreadPoolExecutor () as executor:
             print("Running...")
-            for i in executor.map(gtr.sina_web_info_getter, allSinaURLs):
+            for i in executor.map(gtr.sina_web_info_getter, list(allSinaURLs)):
                 try:
                     if i:
                         sinaStockInfo.append(i)
@@ -45,7 +45,7 @@ def main():
     if str(ifXueqiuStock) == "Y" or str(ifXueqiuStock) == "y":
         with concurrent.futures.ThreadPoolExecutor () as executor:
             print("Running...")
-            for i in executor.map(gtr.xueqiu_web_info_getter, allXueqiuURLs):
+            for i in executor.map(gtr.xueqiu_web_info_getter, list(allXueqiuURLs)):
                 try:
                     if i:
                         xueqiuStockInfo.append(i)

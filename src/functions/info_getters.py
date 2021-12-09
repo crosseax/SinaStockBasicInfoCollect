@@ -4,37 +4,35 @@ from datetime import date
 
 
 # number generator
-def china_stock_id_sequence(n, m):
+def china_stock_id_sequence_generator(n, m):
     num = int(n)
     while num < int(m):
         yield "{:06n}".format(num)
         num += 1
 
 
+# is a generator
 # generates urls for sina stock websites
 def sina_url_generator(beginNum, endNum):
-    stockURLs = []
     prefix = "sz"
-    for num in china_stock_id_sequence(beginNum, endNum):
+    for num in china_stock_id_sequence_generator(beginNum, endNum):
         if num[0] == "6":
             prefix = "sh"
         elif num[0] == "8" or num[0] == "4":
             prefix = "bj"
-        stockURLs.append(f"https://finance.sina.com.cn/realstock/company/{prefix}{num}/nc.shtml")
-    return stockURLs
+        yield (f"https://finance.sina.com.cn/realstock/company/{prefix}{num}/nc.shtml")
 
 
+# is a geneartor
 # generates urls for xueqiu stock websites
 def xueqiu_url_generator(beginNum, endNum):
-    stockURLs = []
     prefix = "SZ"
-    for num in china_stock_id_sequence(beginNum, endNum):
+    for num in china_stock_id_sequence_generator(beginNum, endNum):
         if num[0] == "6":
             prefix = "SH"
         elif num[0] == "8" or num[0] == "4":
             prefix = "BJ"
-        stockURLs.append(f"https://xueqiu.com/S/{prefix}{num}")
-    return stockURLs
+        yield (f"https://xueqiu.com/S/{prefix}{num}")
 
 
 # retrieve the information from sina web in particular
