@@ -1,4 +1,5 @@
 import xlsxwriter
+from functions.datacleaning import xueqiu as x
 
 
 # use collected info to create a Sina Stock workbook
@@ -28,6 +29,9 @@ def creating_xueqiu_workbook(allCompanies):
 
     for row in range(len(allCompanies)):
         for col in range(len(allCompanies[0])):
-            outSheet.write(row+1, col, allCompanies[row][col].split('：')[1])
+            if col > 5:
+                outSheet.write(row+1, col, x.xueqiu_data_adjustment(allCompanies[row][col]))
+            else:
+                outSheet.write(row+1, col, allCompanies[row][col].split('：')[1])
     
     outWorkbook.close()
