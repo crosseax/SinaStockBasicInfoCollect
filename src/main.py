@@ -61,12 +61,14 @@ def main():
         u.showSinaInfo(sinaStockInfo)
         print()
         u.showXueqiuInfo(xueqiuStockInfo)
+        print()
         
 
     # result output
-    print()
+    print ("============")
     print (f"Numbers of Sina companies' info collected: {len(sinaStockInfo)}")
     print (f"Numbers of Xueqiu companies' info collected: {len(xueqiuStockInfo)}")
+    print ("============")
     print ("Excel Worksheet successfully created")
     print ("Done")
 
