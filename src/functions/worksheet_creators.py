@@ -11,6 +11,7 @@ def creating_sina_workbook(allCompanies):
             outSheet.write(row, col, allCompanies[row][col])
     outWorkbook.close()
 
+
 # use collected info to create a Sina Stock workbook
 def creating_xueqiu_workbook(allCompanies): 
     print ("Creating xlsx file and importing Xueqiu data...")
