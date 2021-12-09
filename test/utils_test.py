@@ -1,10 +1,7 @@
-# from typing import Generator
 import requests
-# import chardet
 import xlsxwriter
 import concurrent.futures
 from bs4 import BeautifulSoup
-# from requests.models import Response
 from datetime import date
 
 # number generator
@@ -106,6 +103,11 @@ def xueqiu_web_info_getter(url):
 
 
 def sina_multithreading_executor(allSinaURLs, allCompanies):
+    '''
+    multi-threading to execute the collector functions,
+    pay attention to parameters,
+    function(input, output),
+    '''
     with concurrent.futures.ThreadPoolExecutor () as executor:
         print("Running...")
         for i in executor.map(sina_web_info_getter, list(allSinaURLs)):
